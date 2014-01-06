@@ -5,8 +5,7 @@ var RANDOM = {};
 (function () {
 	/*jslint bitwise: true*/
 	RANDOM.RC4 = function (seed) {
-		var seedString,
-			byteSize,
+		var byteSize,
 			byteMask,
 			key,
 			keyLength,
@@ -28,12 +27,10 @@ var RANDOM = {};
 
 		switch (typeof seed) {
 		case "string":
-			seedString = seed;
-			seed = 0;
 			key = [];
 
-			for (i = 0; i < seedString; i += 1) {
-				key[i & byteMask] ^= seedString.charCodeAt(i) & byteMask;
+			for (i = 0; i < seed.length; i += 1) {
+				key[i & byteMask] ^= seed.charCodeAt(i) & byteMask;
 			}
 
 			keyLength = key.length;
@@ -84,7 +81,7 @@ var RANDOM = {};
 			return s[(s[i] + s[j]) & byteMask];
 		};
 
-		this.random = function () {
+		this.nextUint31 = function () {
 			var result,
 				bytes;
 
@@ -100,6 +97,12 @@ var RANDOM = {};
 
 			return result;
 		};
+
+		this.random = function () {
+			return this.nextUint31() / this.MAX_VALUE;
+		};
+
+		this.MAX_VALUE = 0x80000000;
 
 		while (throwAway > 0) {
 			this.nextByte();
