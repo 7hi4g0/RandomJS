@@ -1,0 +1,20 @@
+{
+  "name": "RandomJS",
+  "version": "0.0.1",
+  "description": "PRNG's in JS.",
+  "main": "RANDOM.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/7hi4g0/RandomJS.git"
+  },
+  "keywords": [
+    "prng",
+    "random"
+  ],
+  "author": "Thiago Dourado de Andrade",
+  "license": "none",
+  "gitHead": "0f3e806fcc801c7c3ee090602fd8e9fb11da0d5c"
+}
