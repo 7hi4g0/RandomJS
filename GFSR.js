@@ -1,18 +1,22 @@
-var RANDOM;
+var globalObj;
 
-RANDOM = {};
+if (typeof window !== "undefined" && typeof window.document !== "undefined" && this === window) {
+	globalObj = window;
+} else if (typeof global !== "undefined" && typeof global.process !== "undefined" && typeof module !== "undefined") {
+	globalObj = module;
+}
 
-(function () {
+(function (global) {
 	"use strict";
 
-	RANDOM.GFSR = function (p, q, size, delay) {
+	function GFSR(p, q, size, delay) {
 		var m,
 			n,
 			j,
 			self;
 
-		if (!(this instanceof RANDOM.GFSR)) {
-			return new RANDOM.GFSR(p, q, size);
+		if (!(this instanceof GFSR)) {
+			return new GFSR(p, q, size, delay);
 		}
 
 		function setr() {
@@ -79,6 +83,10 @@ RANDOM = {};
 
 		setr();
 	}
-}());
 
-exports.RANDOM = RANDOM;
+	if (typeof global.exports !== "undefined") {
+		global.exports = GFSR;
+	} else {
+		global.GFSR = GFSR;
+	}
+}(globalObj));
