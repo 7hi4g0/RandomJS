@@ -1,8 +1,14 @@
 ﻿/*export RANDOM*/
 
-var RANDOM = {};
+var RANDOM
 
-(function () {
+if (typeof module === "undefined" && typeof window !== "undefined") {
+	RANDOM = {};
+} else {
+	RANDOM = exports;
+}
+
+(function (RANDOM) {
 	/*jslint bitwise: true*/
 	RANDOM.RC4 = function (seed) {
 		var byteSize,
@@ -109,4 +115,4 @@ var RANDOM = {};
 			throwAway -= 1;
 		}
 	};
-}());
+}(RANDOM));
