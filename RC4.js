@@ -49,12 +49,12 @@ if (typeof module === "undefined" && typeof window !== "undefined") {
 			key = [];
 			keyLength = 0;
 
-			while (seed > 0) {
+			do {
 				key.unshift(seed & byteMask);
 				keyLength += 1;
 
 				seed >>>= 8;
-			}
+			} while (seed !== 0);
 			break;
 		default:
 			throw new Error("Too few arguments!");
